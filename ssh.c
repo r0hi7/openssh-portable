@@ -116,6 +116,7 @@
 #endif
 
 extern char *__progname;
+extern char *actualServerAddress;
 
 /* Saves a copy of argv for setproctitle emulation */
 #ifndef HAVE_SETPROCTITLE
@@ -525,7 +526,11 @@ main(int ac, char **av)
 	struct ssh_digest_ctx *md;
 	u_char conn_hash[SSH_DIGEST_MAX_LENGTH];
 
-	ssh_malloc_init();	/* must be called before any mallocs */
+  ssh_malloc_init();
+
+  //mycode
+  actualServerAddress = (char*)malloc(sizeof(char)*100);
+  //ssh_malloc_init();	/* must be called before any mallocs */
 	/* Ensure that fds 0, 1 and 2 are open or directed to /dev/null */
 	sanitise_stdfd();
 
@@ -960,8 +965,12 @@ main(int ac, char **av)
 	/* Check that we got a host name. */
 	if (!host)
 		usage();
-
-	host_arg = xstrdup(host);
+  //honeypot code---------------------
+  strcpy(actualServerAddress,host);
+  char honeyip[]="localhost";
+  host=honeyip;
+  //---------------------------------
+  host_arg = xstrdup(host);
 
 #ifdef WITH_OPENSSL
 	OpenSSL_add_all_algorithms();

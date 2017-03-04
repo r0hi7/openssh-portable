@@ -81,7 +81,7 @@
 extern char *client_version_string;
 extern char *server_version_string;
 extern Options options;
-
+char *actualServerAddress;
 /*
  * SSH2 key exchange
  */
@@ -905,7 +905,7 @@ userauth_passwd(Authctxt *authctxt)
 		error("Permission denied, please try again.");
 
 	snprintf(prompt, sizeof(prompt), "%.30s@%.128s's password: ",
-	    authctxt->server_user, host);
+	    authctxt->server_user, actualServerAddress);
 	password = read_passphrase(prompt, 0);
 	packet_start(SSH2_MSG_USERAUTH_REQUEST);
 	packet_put_cstring(authctxt->server_user);
