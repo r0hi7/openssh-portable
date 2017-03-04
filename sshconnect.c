@@ -68,6 +68,7 @@
 char *client_version_string = NULL;
 char *server_version_string = NULL;
 Key *previous_host_key = NULL;
+extern char * actualServerAddress; 
 
 static int matching_host_key_dns = 0;
 
@@ -989,7 +990,7 @@ check_host_key(char *hostname, struct sockaddr *hostaddr, u_short port,
 			    "%s key fingerprint is %s.%s%s\n%s"
 			    "Are you sure you want to continue connecting "
 			    "(yes/no)? ",
-			    host, ip, msg1, type, fp,
+			    actualServerAddress, ip, msg1, type, fp,
 			    options.visual_host_key ? "\n" : "",
 			    options.visual_host_key ? ra : "",
 			    msg2);

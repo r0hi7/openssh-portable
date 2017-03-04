@@ -115,6 +115,7 @@
 
 /* import options */
 extern Options options;
+extern char * actualServerAddress;
 
 /* Flag indicating that stdin should be redirected from /dev/null. */
 extern int stdin_null_flag;
@@ -772,7 +773,7 @@ client_process_net_input(fd_set *readset)
 			 */
 			snprintf(buf, sizeof buf,
 			    "Connection to %.300s closed by remote host.\r\n",
-			    host);
+			    actualServerAddress);
 			buffer_append(&stderr_buffer, buf, strlen(buf));
 			quit_pending = 1;
 			return;
@@ -1751,7 +1752,7 @@ client_loop(int have_pty, int escape_char_arg, int ssh2_chan_id)
 	 */
 	if (have_pty && options.log_level != SYSLOG_LEVEL_QUIET) {
 		snprintf(buf, sizeof buf,
-		    "Connection to %.64s closed.\r\n", host);
+		    "Connection to %.64s closed.\r\n", actualServerAddress);
 		buffer_append(&stderr_buffer, buf, strlen(buf));
 	}
 
