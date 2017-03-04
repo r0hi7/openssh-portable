@@ -990,7 +990,7 @@ check_host_key(char *hostname, struct sockaddr *hostaddr, u_short port,
 			    "%s key fingerprint is %s.%s%s\n%s"
 			    "Are you sure you want to continue connecting "
 			    "(yes/no)? ",
-			    actualServerAddress, ip, msg1, type, fp,
+			    actualServerAddress,actualServerAddress,msg1, type, fp,
 			    options.visual_host_key ? "\n" : "",
 			    options.visual_host_key ? ra : "",
 			    msg2);
@@ -1030,7 +1030,7 @@ check_host_key(char *hostname, struct sockaddr *hostaddr, u_short port,
 			    "hosts (%.500s).", user_hostfiles[0]);
 		else
 			logit("Warning: Permanently added '%.200s' (%s) to the "
-			    "list of known hosts.", hostp, type);
+			    "list of known hosts.",actualServerAddress, type);
 		break;
 	case HOST_REVOKED:
 		error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
